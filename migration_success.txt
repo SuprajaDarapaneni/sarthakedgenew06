@@ -1,0 +1,6 @@
+﻿
+   INFO  Running migrations.  
+
+  2026_02_22_211558_add_capacity_to_class_sections_table  18ms DONE
+  2026_02_23_221000_unify_exams_table  43ms DONE
+

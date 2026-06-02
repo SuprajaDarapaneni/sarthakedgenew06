@@ -1,0 +1,9 @@
+total 78416
+drwxrwx---  6 sarthakedge sarthakedge     4096 Mar 11 12:28 .
+drwxrwx---  3 sarthakedge sarthakedge     4096 Mar  7 06:33 ..
+drwxr-xr-x  2 sarthakedge sarthakedge     4096 Mar 11 12:28 archive
+-rw-r--r--  1 sarthakedge sarthakedge 80245714 Mar 11 12:25 archive.zip
+lrwxrwxrwx  1 sarthakedge sarthakedge        9 Mar  7 06:47 php_code -> php_code1
+drwxrwx--- 15 sarthakedge sarthakedge    12288 Mar  9 10:41 php_code1
+drwxrwx--- 15 sarthakedge sarthakedge    12288 Mar  9 05:07 php_code2
+drwxrwx--- 15 sarthakedge sarthakedge    12288 Mar  9 05:07 php_code3

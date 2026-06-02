@@ -1,0 +1,1 @@
+﻿./php_code1/app/Http/Controllers/Controller.php:221:            return view('comingsoon', compact('features', 'packages', 'settings', 'faqs', 'guidances', 'languages', 'schoolSettings', 'featureSections', 'about_us_lists', 'counter', 'trail_package', 'extraFields', 'demoSchoolUrl', 'allSchools', 'isDemoSchool'));

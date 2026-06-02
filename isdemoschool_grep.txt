@@ -1,0 +1,5 @@
+﻿./app/Http/Controllers/Controller.php:113:        $isDemoSchool = 0;
+./app/Http/Controllers/Controller.php:123:                $isDemoSchool = 1;
+./app/Http/Controllers/Controller.php:221:            return view('home1', compact('features', 'packages', 'settings', 'faqs', 'guidances', 'languages', 'schoolSettings', 'featureSections', 'about_us_lists', 'counter', 'trail_package', 'extraFields', 'demoSchoolUrl', 'allSchools', 'isDemoSchool'));
+./app/Http/Controllers/Controller.php:222:            // return view('home', compact('features', 'packages', 'settings', 'faqs', 'guidances', 'languages', 'schoolSettings', 'featureSections', 'about_us_lists', 'counter', 'trail_package', 'extraFields', 'demoSchoolUrl', 'allSchools', 'isDemoSchool'));
+./resources/views/home.blade.php:23:                                        @if ($isDemoSchool == 1)

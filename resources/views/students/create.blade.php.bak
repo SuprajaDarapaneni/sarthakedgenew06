@@ -1,0 +1,691 @@
+@extends('layouts.master')
+
+@section('title')
+    {{ __('students') }}
+@endsection
+
+@section('content')
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                {{ __('manage') . ' ' . __('students') }}
+            </h3>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card new-admission-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <h4 class="card-title mb-1">{{ __('New Admission') }}</h4>
+                                <p class="text-muted mb-0">{{ __('Fill in the student details to complete the admission process') }}</p>
+                            </div>
+                        </div>
+
+                        {{-- Stepper --}}
+                        <div class="admission-stepper mb-4">
+                            <div class="step active" data-step="1">
+                                <div class="step-circle">1</div>
+                                <div class="step-label">{{ __('Personal Info') }}</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-circle">2</div>
+                                <div class="step-label">{{ __('Guardian Details') }}</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-circle">3</div>
+                                <div class="step-label">{{ __('Academic') }}</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-circle">4</div>
+                                <div class="step-label">{{ __('Documents') }}</div>
+                            </div>
+                        </div>
+
+                        <form class="pt-3 student-registration-form" id="create-form" data-success-function="formSuccessFunction" enctype="multipart/form-data" action="{{ route('students.store') }}" method="POST" novalidate="novalidate">
+                            @csrf
+
+                            {{-- Top level admission details --}}
+                            <div class="row mb-3">
+                                <div class="form-group col-sm-12 col-md-6 col-xl-3">
+                                    <label>{{ __('Gr Number') }} <span class="text-danger">*</span></label>
+                                    {!! Form::text('admission_no', $admission_no, ['readonly','placeholder' => __('Gr Number'), 'class' => 'form-control']) !!}
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-3">
+                                    <label for="class_section">{{ __('class_section') }} <span class="text-danger">*</span></label>
+                                    <select name="class_section_id" id="class_section" class="form-control select2">
+                                        <option value="">{{ __('select') . ' ' . __('Class') . ' ' . __('section') }}</option>
+                                        @if(count($class_sections))
+                                            @foreach ($class_sections as $class_section)
+                                                <option value="{{ $class_section->id }}">{{$class_section->full_name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-3">
+                                    <label for="session_year_id">{{ __('session_year') }} <span class="text-danger">*</span></label>
+                                    <select name="session_year_id" id="session_year_id" class="form-control select2">
+                                        @if(count($sessionYears))
+                                            @foreach ($sessionYears as $year)
+                                                <option value="{{ $year->id }}" {{$year->default==1 ? "selected" : ""}}>{{$year->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-3">
+                                    <label>{{ __('admission_date') }} <span class="text-danger">*</span></label>
+                                    {!! Form::text('admission_date', null, ['placeholder' => __('admission_date'), 'class' => 'datepicker-popup-no-future form-control','id'=>'admission_date','autocomplete'=>'off']) !!}
+                                </div>
+                                @if(!empty($features))
+                                    <div class="form-group col-sm-12 col-md-6 col-xl-3">
+                                        <label>{{ __('Status') }} <span class="text-danger">*</span></label>
+                                        <div class="d-flex">
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                    {!! Form::radio('status', 1) !!}
+                                                    {{ __('Active') }}
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                    {!! Form::radio('status', 0,true) !!}
+                                                    {{ __('Inactive') }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <span class="text-danger small d-block mt-1">{{ __('Note').':-'.__('Activating this will consider in your current subscription cycle') }}</span>
+                                    </div>
+                                @endif
+                            </div>
+
+                            {{-- Tabs header --}}
+                            <ul class="nav nav-tabs admission-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#tab-personal" role="tab" data-step-target="1">{{ __('Personal') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tab-guardian" role="tab" data-step-target="2">{{ __('Guardian') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tab-academic" role="tab" data-step-target="3">{{ __('Academic') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tab-documents" role="tab" data-step-target="4">{{ __('Documents') }}</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content admission-tab-content mt-4">
+                                {{-- Personal Info --}}
+                                <div class="tab-pane fade show active" id="tab-personal" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-4 d-flex flex-column align-items-center">
+                                            <div class="admission-photo-upload mb-2">
+                                                <span class="upload-icon">
+                                                    <i class="fa fa-upload"></i>
+                                                </span>
+                                            </div>
+                                            <label class="btn btn-light btn-sm mb-0" for="student_image_input">{{ __('Upload Photo') }}</label>
+                                            <input type="file" id="student_image_input" name="image" class="file-upload-default d-none" accept="image/*"/>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="form-group col-sm-12 col-md-6">
+                                                    <label>{{ __('first_name') }} <span class="text-danger">*</span></label>
+                                                    {!! Form::text('first_name', null, ['placeholder' => __('Enter first name'), 'class' => 'form-control']) !!}
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-6">
+                                                    <label>{{ __('last_name') }} <span class="text-danger">*</span></label>
+                                                    {!! Form::text('last_name', null, ['placeholder' => __('Enter last name'), 'class' => 'form-control']) !!}
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-6">
+                                                    <label>{{ __('dob') }} <span class="text-danger">*</span></label>
+                                                    {!! Form::text('dob', null, ['placeholder' => 'dd-mm-yyyy', 'class' => 'datepicker-popup-no-future form-control','autocomplete'=>'off']) !!}
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-6">
+                                                    <label>{{ __('gender') }} <span class="text-danger">*</span></label>
+                                                    <select class="form-control" name="gender">
+                                                        <option value="male" selected>{{ __('male') }}</option>
+                                                        <option value="female">{{ __('female') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-6">
+                                                    <label>{{ __('mobile') }}</label>
+                                                    {!! Form::number('mobile', null, ['placeholder' => __('Enter mobile number'), "pattern"=>"[0-9]{6,15}", "title"=>"Please enter a valid mobile number (6-15 digits)", 'min' => 0 ,'class' => 'form-control remove-number-increment']) !!}
+                                                </div>
+
+                                                {{-- Row: Blood Group / Nationality --}}
+                                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                                    <label>{{ __('Blood Group') }}</label>
+                                                    <select name="blood_group" class="form-control">
+                                                        <option value="">{{ __('Select blood group') }}</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                                    <label>{{ __('Nationality') }}</label>
+                                                    <input type="text" name="nationality" class="form-control" placeholder="{{ __('Enter nationality') }}">
+                                                </div>
+
+                                                {{-- Row: Religion / Category --}}
+                                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                                    <label>{{ __('Religion') }}</label>
+                                                    <input type="text" name="religion" class="form-control" placeholder="{{ __('Enter religion') }}">
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                                    <label>{{ __('Category') }}</label>
+                                                    <select name="category" class="form-control">
+                                                        <option value="">{{ __('Select category') }}</option>
+                                                        <option value="General">General</option>
+                                                        <option value="OBC">OBC</option>
+                                                        <option value="SC">SC</option>
+                                                        <option value="ST">ST</option>
+                                                    </select>
+                                                </div>
+
+                                                {{-- Address block --}}
+                                                <div class="form-group col-sm-12">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="mb-0">{{ __('Address') }} <span class="text-danger">*</span></label>
+                                                        <button type="button" class="btn btn-link p-0 small" id="btn-copy-address">
+                                                            {{ __('Same as Current Address') }}
+                                                        </button>
+                                                    </div>
+                                                    {!! Form::textarea('current_address', null, ['required', 'placeholder' => __('Enter complete address'), 'class' => 'form-control', 'rows' => 2]) !!}
+                                                </div>
+
+                                                {{-- City / State / Pincode --}}
+                                                <div class="form-group col-sm-12 col-md-4">
+                                                    <label>{{ __('City') }}</label>
+                                                    <input type="text" name="city" class="form-control" placeholder="{{ __('Enter city') }}">
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-4">
+                                                    <label>{{ __('State') }}</label>
+                                                    <input type="text" name="state" class="form-control" placeholder="{{ __('Enter state') }}">
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-4">
+                                                    <label>{{ __('Pincode') }}</label>
+                                                    <input type="text" name="pincode" class="form-control" placeholder="{{ __('Enter pincode') }}">
+                                                </div>
+
+                                                {{-- Keep permanent address for backend compatibility, but visually secondary --}}
+                                                <div class="form-group col-sm-12">
+                                                    <label>{{ __('permanent_address') }} <span class="text-danger">*</span></label>
+                                                    {!! Form::textarea('permanent_address', null, ['required', 'placeholder' => __('Enter complete address'), 'class' => 'form-control', 'rows' => 2]) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Guardian Details --}}
+                                <div class="tab-pane fade" id="tab-guardian" role="tabpanel">
+                                    {{-- Guardian 1 - Father (primary guardian used by backend) --}}
+                                    <div class="mb-3">
+                                        <h6 class="font-weight-bold mb-3">{{ __('Guardian 1 (Father)') }}</h6>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+            <label for="guardian_email">{{ __('guardian') . ' ' . __('email') }} <span class="text-danger">*</span></label>
+                                                <select class="guardian-search form-control guardian_email" id="guardian_email"></select>
+                                                <input type="hidden" id="guardian_email_hidden" class="guardian_email" name="guardian_email">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('First Name') }} <span class="text-danger">*</span></label>
+                                                {!! Form::text('guardian_first_name', null, ['placeholder' => __('Enter first name'), 'class' => 'form-control', 'id' => 'guardian_first_name']) !!}
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Last Name') }} <span class="text-danger">*</span></label>
+                                                {!! Form::text('guardian_last_name', null, ['placeholder' => __('Enter last name'), 'class' => 'form-control', 'id' => 'guardian_last_name']) !!}
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Mobile') }} <span class="text-danger">*</span></label>
+                                                {!! Form::number('guardian_mobile', null, ['placeholder' => __('Enter mobile number'), "pattern"=>"[0-9]{6,15}", "title"=>"Please enter a valid mobile number (6-15 digits)", 'class' => 'form-control remove-number-increment', 'id' => 'guardian_mobile','min' => 1 ]) !!}
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Alternate Mobile') }}</label>
+                                                <input type="number" name="guardian_alt_mobile" id="guardian_alt_mobile" class="form-control remove-number-increment" min="0" placeholder="{{ __('Enter alternate number') }}">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Gender') }} <span class="text-danger">*</span></label>
+                                                <select class="form-control" name="guardian_gender" id="guardian_gender_select">
+                                                    <option value="male" selected>{{ __('male') }}</option>
+                                                    <option value="female">{{ __('female') }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label for="guardian_image">{{ __('Photo') }}</label>
+                                                <input type="file" name="guardian_image" accept="image/*" class="file-upload-default"/>
+                                                <div class="input-group col-xs-12 mt-1">
+                                                    <input type="text" id="guardian_image" class="form-control file-upload-info" disabled="" placeholder="{{ __('image') }}"/>
+                                                    <span class="input-group-append">
+                                                        <button class="file-upload-browse btn btn-theme" type="button">{{ __('upload') }}</button>
+                                                    </span>
+                                                </div>
+                                                <img id="guardian-image-preview" src="" alt="Guardian Image" class="img-fluid mt-2 rounded" style="max-width: 80px;"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    {{-- Guardian 2 - Mother (additional info only) --}}
+                                    <div class="mt-3">
+                                        <h6 class="font-weight-bold mb-3">{{ __('Guardian 2 (Mother)') }}</h6>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('First Name') }}</label>
+                                                <input type="text" name="guardian2_first_name" class="form-control" placeholder="{{ __('Enter first name') }}">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Last Name') }}</label>
+                                                <input type="text" name="guardian2_last_name" class="form-control" placeholder="{{ __('Enter last name') }}">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Mobile') }}</label>
+                                                <input type="number" name="guardian2_mobile" class="form-control remove-number-increment" min="0" placeholder="{{ __('Enter mobile number') }}">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Alternate Mobile') }}</label>
+                                                <input type="number" name="guardian2_alt_mobile" class="form-control remove-number-increment" min="0" placeholder="{{ __('Enter alternate number') }}">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Gender') }}</label>
+                                                <select class="form-control" name="guardian2_gender">
+                                                    <option value="female">{{ __('female') }}</option>
+                                                    <option value="male">{{ __('male') }}</option>
+                                                    <option value="other">{{ __('Other') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Academic (extra fields, if any) --}}
+                                <div class="tab-pane fade" id="tab-academic" role="tabpanel">
+                                    @if(count($extraFields))
+                                        <div class="row other-details">
+                                            @foreach ($extraFields as $key => $data)
+                                                {{ Form::hidden('extra_fields['.$key.'][id]', '', ['id' => $data->type.'_'.$key.'_id']) }}
+                                                {{ Form::hidden('extra_fields['.$key.'][form_field_id]', $data->id, ['id' => $data->type.'_'.$key.'_id']) }}
+                                                <div class='form-group col-md-12 col-lg-6 col-xl-4 col-sm-12'>
+                                                    @if($data->type != 'radio' && $data->type != 'checkbox')
+                                                        <label>{{$data->name}} @if($data->is_required)
+                                                                <span class="text-danger">*</span>
+                                                            @endif</label>
+                                                    @endif
+                                                    @if($data->type == 'text')
+                                                        {{ Form::text('extra_fields['.$key.'][data]', '', ['class' => 'form-control text-fields', 'id' => $data->type.'_'.$key, 'placeholder' => $data->name, ($data->is_required == 1 ? 'required' : '')]) }}
+                                                    @elseif($data->type == 'number')
+                                                        {{ Form::number('extra_fields['.$key.'][data]', '', ['min' => 0, 'class' => 'form-control number-fields', 'id' => $data->type.'_'.$key, 'placeholder' => $data->name, ($data->is_required == 1 ? 'required' : '')]) }}
+                                                    @elseif($data->type == 'dropdown')
+                                                        {{ Form::select('extra_fields['.$key.'][data]',$data->default_values,null,
+                                                            ['id' => $data->type.'_'.$key,'class' => 'form-control select-fields',
+                                                                ($data->is_required == 1 ? 'required' : ''),
+                                                                'placeholder' => 'Select '.$data->name
+                                                            ]
+                                                        )}}
+                                                    @elseif($data->type == 'radio')
+                                                        <label class="d-block">{{$data->name}} @if($data->is_required)
+                                                                <span class="text-danger">*</span>
+                                                            @endif</label>
+                                                        <div class="row col-md-12 col-lg-12 col-xl-6 col-sm-12">
+                                                            @if(count($data->default_values))
+                                                                @foreach ($data->default_values as $keyRadio => $value)
+                                                                    <div class="form-check mr-2">
+                                                                        <label class="form-check-label">
+                                                                            {{ Form::radio('extra_fields['.$key.'][data]', $value, null, ['id' => $data->type.'_'.$keyRadio, 'class' => 'radio-fields',($data->is_required == 1 ? 'required' : '')]) }}
+                                                                            {{$value}}
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
+                                                    @elseif($data->type == 'checkbox')
+                                                        <label class="d-block">{{$data->name}} @if($data->is_required)
+                                                                <span class="text-danger">*</span>
+                                                            @endif</label>
+                                                        @if(count($data->default_values))
+                                                            <div class="row col-lg-12 col-xl-6 col-md-12 col-sm-12">
+                                                                @foreach ($data->default_values as $chkKey => $value)
+                                                                    <div class="mr-2 form-check">
+                                                                        <label class="form-check-label">
+                                                                            {{ Form::checkbox('extra_fields['.$key.'][data][]', $value, null, ['id' => $data->type.'_'.$chkKey, 'class' => 'form-check-input chkclass checkbox-fields',($data->is_required == 1 ? 'required' : '')]) }} {{ $value }}
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        @endif
+                                                    @elseif($data->type == 'textarea')
+                                                        {{ Form::textarea('extra_fields['.$key.'][data]', '', ['placeholder' => $data->name, 'id' => $data->type.'_'.$key, 'class' => 'form-control textarea-fields', ($data->is_required ? 'required' : '') , 'rows' => 3]) }}
+                                                    @elseif($data->type == 'file')
+                                                        <div class="input-group col-xs-12">
+                                                            {{ Form::file('extra_fields['.$key.'][data]', ['class' => 'file-upload-default', 'id' => $data->type.'_'.$key, ($data->is_required ? 'required' : '')]) }}
+                                                            {{ Form::text('', '', ['class' => 'form-control file-upload-info', 'disabled' => '', 'placeholder' => __('image')]) }}
+                                                            <span class="input-group-append">
+                                                                <button class="file-upload-browse btn btn-theme" type="button">{{ __('upload') }}</button>
+                                                            </span>
+                                                        </div>
+                                                        <div id="file_div_{{$key}}" class="mt-2 d-none file-div">
+                                                            <a href="" id="file_link_{{$key}}" target="_blank">{{$data->name}}</a>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="row">
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Previous School (if any)') }}</label>
+                                                <input type="text" name="previous_school" class="form-control" placeholder="{{ __('Enter previous school name') }}">
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6">
+                                                <label>{{ __('Transfer Certificate No. (if any)') }}</label>
+                                                <input type="text" name="transfer_certificate_no" class="form-control" placeholder="{{ __('Enter TC number') }}">
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Documents (reuse file-type extra fields for clarity) --}}
+                                <div class="tab-pane fade" id="tab-documents" role="tabpanel">
+                                    @php
+                                        $documentFields = $extraFields->where('type', 'file');
+                                    @endphp
+                                    @if(isset($documentFields) && $documentFields->count())
+                                        <div class="row">
+                                            @foreach ($documentFields as $key => $data)
+                                                {{ Form::hidden('extra_fields['.$key.'][id]', '', ['id' => 'doc_'.$data->type.'_'.$key.'_id']) }}
+                                                {{ Form::hidden('extra_fields['.$key.'][form_field_id]', $data->id, ['id' => 'doc_'.$data->type.'_'.$key.'_id']) }}
+                                                <div class="form-group col-md-6 col-lg-4">
+                                                    <label>{{$data->name}} @if($data->is_required)
+                                                            <span class="text-danger">*</span>
+                                                        @endif</label>
+                                                    <div class="input-group col-xs-12">
+                                                        {{ Form::file('extra_fields['.$key.'][data]', ['class' => 'file-upload-default', 'id' => 'doc_'.$data->type.'_'.$key, ($data->is_required ? 'required' : '')]) }}
+                                                        {{ Form::text('', '', ['class' => 'form-control file-upload-info', 'disabled' => '', 'placeholder' => __('image')]) }}
+                                                        <span class="input-group-append">
+                                                            <button class="file-upload-browse btn btn-theme" type="button">{{ __('upload') }}</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                <label>{{ __('Upload Admission Documents') }}</label>
+                                                <input type="file" name="admission_documents[]" class="form-control-file" multiple>
+                                                <small class="form-text text-muted">
+                                                    {{ __('You can upload transfer certificate, previous report card and any other documents required for admission.') }}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Bottom actions --}}
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <button type="button" class="btn btn-light d-none" id="btn-prev-step">
+                                    &larr; {{ __('Previous') }}
+                                </button>
+                                <div class="ml-auto">
+                                    <button type="button" class="btn btn-outline-secondary mr-2" id="btn-save-draft">
+                                        {{ __('Save as Draft') }}
+                                    </button>
+                                    <button type="button" class="btn btn-theme" id="btn-next-step">
+                                        {{ __('Save & Continue') }} &rarr;
+                                    </button>
+                                    <input class="btn btn-theme d-none" id="create-btn" type="submit" value={{ __('submit') }}>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('style')
+    <style>
+        /* Page background & container to mimic clean centered layout */
+        .content-wrapper {
+            background-color: #f3f4f6;
+        }
+        .content-wrapper .page-header {
+            border-bottom: none;
+            margin-bottom: 0.75rem;
+        }
+        .content-wrapper .page-header .page-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .content-wrapper .row > .col-lg-12.grid-margin {
+            margin-top: 0;
+        }
+
+        .new-admission-card {
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+            border: 1px solid #e5e7eb;
+            max-width: 960px;
+            margin: 0 auto 32px;
+        }
+        .admission-stepper {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 4px 0;
+            margin-bottom: 16px;
+        }
+        .admission-stepper .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .admission-stepper .step::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: #e5e7eb;
+            z-index: 0;
+        }
+        .admission-stepper .step:last-child::after {
+            display: none;
+        }
+        .admission-stepper .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e5e7eb;
+            background: #ffffff;
+            color: #6b7280;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        .admission-stepper .step-label {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .admission-stepper .step.active .step-circle {
+            border-color: #2563eb;
+            background: #2563eb;
+            color: #ffffff;
+        }
+        .admission-stepper .step.completed .step-circle {
+            border-color: #16a34a;
+            background: #16a34a;
+            color: #ffffff;
+        }
+        .admission-stepper .step.active .step-label {
+            color: #111827;
+            font-weight: 600;
+        }
+        .admission-tabs .nav-link {
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 0.75rem 1.5rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .admission-tabs .nav-link.active {
+            color: #111827;
+            border-bottom-color: #2563eb;
+            background: transparent;
+        }
+        .admission-tab-content .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+        .admission-tab-content .form-control {
+            border-radius: 8px;
+        }
+        .admission-photo-upload {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            border: 2px dashed #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9fafb;
+        }
+        .admission-photo-upload .upload-icon {
+            font-size: 24px;
+            color: #9ca3af;
+        }
+        @media (max-width: 768px) {
+            .admission-stepper {
+                padding: 10px 16px;
+            }
+            .admission-stepper .step-label {
+                font-size: 11px;
+            }
+        }
+    </style>
+@endsection
+
+@section('script')
+    <script>
+        function formSuccessFunction() {
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000);
+        }
+
+        $('#admission_date').datepicker({
+            format: "dd-mm-yyyy",
+            rtl: isRTL()
+        }).datepicker("setDate", 'now');
+
+        // Wizard behaviour
+        (function () {
+            const totalSteps = 4;
+            let currentStep = 1;
+
+            const $tabs = $('.admission-tabs .nav-link');
+            const $stepperSteps = $('.admission-stepper .step');
+            const $btnPrev = $('#btn-prev-step');
+            const $btnNext = $('#btn-next-step');
+            const $btnSubmit = $('#create-btn');
+
+            function setStep(step) {
+                currentStep = step;
+
+                // Tabs
+                $tabs.each(function () {
+                    const targetStep = parseInt($(this).data('step-target'), 10);
+                    if (targetStep === step) {
+                        $(this).addClass('active').tab('show');
+                    } else {
+                        $(this).removeClass('active');
+                    }
+                });
+
+                // Stepper state
+                $stepperSteps.each(function () {
+                    const s = parseInt($(this).data('step'), 10);
+                    $(this).removeClass('active completed');
+                    if (s < step) {
+                        $(this).addClass('completed');
+                    }
+                    if (s === step) {
+                        $(this).addClass('active');
+                    }
+                });
+
+                // Buttons visibility / labels
+                if (step === 1) {
+                    $btnPrev.addClass('d-none');
+                } else {
+                    $btnPrev.removeClass('d-none');
+                }
+
+                if (step === totalSteps) {
+                    $btnNext.addClass('d-none');
+                    $btnSubmit.removeClass('d-none');
+                } else {
+                    $btnNext.removeClass('d-none');
+                    $btnSubmit.addClass('d-none');
+                }
+            }
+
+            $btnPrev.on('click', function () {
+                if (currentStep > 1) {
+                    setStep(currentStep - 1);
+                }
+            });
+
+            $btnNext.on('click', function () {
+                if (currentStep < totalSteps) {
+                    setStep(currentStep + 1);
+                }
+            });
+
+            $tabs.on('click', function (e) {
+                e.preventDefault();
+                const targetStep = parseInt($(this).data('step-target'), 10);
+                if (!isNaN(targetStep)) {
+                    setStep(targetStep);
+                }
+            });
+
+            // Save draft (no separate endpoint yet; just simple submit without required check)
+            $('#btn-save-draft').on('click', function () {
+                $('#create-form').attr('novalidate', 'novalidate');
+                $('#create-form')[0].submit();
+            });
+
+            // Sync guardian email select to hidden field
+            $(document).on('change', '.guardian-search', function () {
+                $('#guardian_email_hidden').val($(this).val());
+            });
+
+            // Same as current address -> permanent address
+            $('#btn-copy-address').on('click', function () {
+                const currentAddress = $('textarea[name="current_address"]').val();
+                $('textarea[name="permanent_address"]').val(currentAddress);
+            });
+
+            // Initialize
+            setStep(1);
+        })();
+    </script>
+@endsection

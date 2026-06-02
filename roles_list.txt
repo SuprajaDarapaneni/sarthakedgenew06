@@ -1,0 +1,7 @@
+Current Roles:
+ID: 1, Name: Super Admin, Guard: web
+ID: 3, Name: student, Guard: web
+ID: 4, Name: Admin, Guard: web
+ID: 5, Name: Teacher, Guard: web
+ID: 6, Name: Guardian, Guard: web
+ID: 7, Name: School Admin, Guard: web

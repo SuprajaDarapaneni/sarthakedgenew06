@@ -1,0 +1,2 @@
+﻿/home/sarthakedge/htdocs/sarthakedge.com/deploy_v2/resources/views/home1.blade.php:199:              <h1>Reinventing school management with AI</h1>
+/home/sarthakedge/htdocs/sarthakedge.com/deploy_v2/resources/views/comingsoon.php:69:   <p>Reinventing school management with AI.</p>

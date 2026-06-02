@@ -1,0 +1,215 @@
+/* Sidebar Container */
+.sidebar,
+.sidebar-offcanvas {
+    background: #162fac !important;
+    /* Deep Blue background */
+}
+
+/* Remove default list styles and backgrounds from LI */
+.sidebar .nav .nav-item {
+    background: transparent !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Search Input Fix */
+.sidebar .sidebar-search .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+}
+
+.sidebar .sidebar-search .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Nav List Container */
+.sidebar .nav {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    /* Force children to the left */
+    text-align: left !important;
+    width: 100% !important;
+}
+
+/* Common Nav Link Styles - Using Grid for exact alignment control */
+.sidebar .nav .nav-item .nav-link {
+    background: transparent !important;
+    color: rgba(238, 240, 246, 0.9) !important;
+    padding: 12px 20px !important;
+    /* Fixed padding on left/right */
+    border-radius: 12px !important;
+    margin: 4px 10px !important;
+    /* Margin from sidebar edges */
+    display: grid !important;
+    grid-template-columns: 30px 1fr auto !important;
+    /* Icon, Title, Arrow */
+    align-items: center !important;
+    gap: 10px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: calc(100% - 20px) !important;
+    /* Explicit width */
+    box-sizing: border-box !important;
+    text-align: left !important;
+}
+
+/* Override any state-based flex/centering from style.min.css */
+.sidebar .nav .nav-item .nav-link,
+.sidebar .nav .nav-item .nav-link[aria-expanded="true"],
+.sidebar .nav .nav-item .nav-link[aria-expanded="false"],
+.sidebar .nav .nav-item.active>.nav-link {
+    justify-content: flex-start !important;
+    /* For flex fallback */
+    justify-items: start !important;
+    /* For grid */
+}
+
+/* Icons */
+.sidebar .nav .nav-item .nav-link i.menu-icon {
+    color: inherit !important;
+    font-size: 1.1rem !important;
+    width: 20px !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    /* Center icon within its 30px column */
+}
+
+/* Menu Title */
+.sidebar .nav .nav-item .nav-link .menu-title {
+    color: inherit !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    text-align: left !important;
+    margin: 0 !important;
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+}
+
+/* Dropdown Arrow */
+.sidebar .nav .nav-item .nav-link .menu-arrow {
+    color: inherit !important;
+    margin-left: auto !important;
+    /* Push it to the right */
+    display: inline-block !important;
+    font-family: 'Material Design Icons';
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.9rem !important;
+}
+
+/* Hover & Active States */
+.sidebar .nav .nav-item:hover>.nav-link,
+.sidebar .nav .nav-item .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+.sidebar .nav .nav-item.active>.nav-link {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* Sub-menu (Collapse) */
+.sidebar .nav .sub-menu {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+
+.sidebar .nav .sub-menu .nav-item .nav-link {
+    padding: 8px 15px 8px 50px !important;
+    /* Strong left indentation */
+    margin: 2px 10px !important;
+    font-size: 0.85rem !important;
+    grid-template-columns: 1fr !important;
+    /* Simplified grid for sub-menu */
+    width: calc(100% - 20px) !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+}
+
+/* Remove default bullets */
+/* Remove ALL potential yellow decorations (pseudo-elements and borders) */
+.sidebar .nav .nav-item .nav-link,
+.sidebar .nav .nav-item .nav-link::before,
+.sidebar .nav .nav-item .nav-link::after {
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+}
+
+.sidebar .nav .nav-item .nav-link::before,
+.sidebar .nav .nav-item .nav-link::after {
+    display: none !important;
+    content: none !important;
+}
+
+.sidebar .nav .sub-menu .nav-item .nav-link:before {
+    display: none !important;
+}
+
+/* Sidebar Brand Wrapper */
+.sidebar .sidebar-brand-wrapper {
+    background: #162fac !important;
+}
+
+.sidebar .sidebar-brand-wrapper .sidebar-brand {
+    color: white !important;
+    text-align: left !important;
+    padding-left: 20px !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+}
+
+/* Explicit Global Sidebar Override */
+.sidebar nav,
+.sidebar ul,
+.sidebar li,
+.sidebar a,
+.sidebar span,
+.sidebar i,
+.sidebar div {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+/* Force Flex items to the start */
+.sidebar .nav .nav-item,
+.sidebar .nav .nav-item .nav-link,
+.sidebar .nav .sub-menu {
+    justify-content: flex-start !important;
+    align-content: flex-start !important;
+}
+
+/* Specific fix for Grid layout in links */
+.sidebar .nav .nav-item .nav-link {
+    justify-items: start !important;
+}
+
+/* Search input specific alignment */
+.sidebar .sidebar-search {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    text-align: left !important;
+}
+
+.sidebar .sidebar-search .form-control {
+    text-align: left !important;
+    padding-left: 15px !important;
+}

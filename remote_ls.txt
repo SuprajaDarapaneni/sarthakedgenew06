@@ -1,0 +1,19 @@
+﻿total 453440
+-rwxrwx---  1 sarthakedge sarthakedge  31739748 Feb 27 12:23 archive.zip
+drwxrwx--- 13 sarthakedge sarthakedge      4096 Dec  9 07:02 beta
+drwxr-xr-x 13 sarthakedge sarthakedge      4096 Mar  2 07:01 deploy_v2
+-rw-r--r--  1 sarthakedge sarthakedge  32197731 Feb 27 16:58 deploy_v4.zip
+-rw-r--r--  1 sarthakedge sarthakedge  32197747 Feb 27 17:35 deploy_v5.zip
+-rwxrwx---  1 sarthakedge sarthakedge        64 Dec  9 14:32 index.html
+-rwxrwx---  1 sarthakedge sarthakedge        31 Dec  9 06:59 index.php
+drwxrwx--- 16 sarthakedge sarthakedge      4096 Feb 25 12:14 php_25-02-2026
+drwxrwx--- 16 sarthakedge sarthakedge      4096 Feb 25 17:22 php_26-02-2026
+drwxrwx--- 13 sarthakedge sarthakedge      4096 Dec 29 06:41 php_code
+drwxrwx--- 14 sarthakedge sarthakedge      4096 Feb 26 06:27 php_code1
+drwxrwx--- 14 sarthakedge sarthakedge      4096 Feb  2 14:49 php_code2
+drwxrwx--- 13 sarthakedge sarthakedge      4096 Feb 14 06:18 phpnew
+drwxrwx--- 13 sarthakedge sarthakedge      4096 Feb 10 08:02 phpnew1
+drwxr-xr-x  2 sarthakedge sarthakedge      4096 Feb 26 13:18 sarthakedgenewcode-final (1)
+-rw-r--r--  1 sarthakedge sarthakedge 180889086 Feb 26 13:16 sarthakedgenewcode-final (1).zip
+drwxrwx---  2 sarthakedge sarthakedge      4096 Feb 25 14:05 sarthakedgenewcode-final (2)
+-rw-r--r--  1 sarthakedge sarthakedge 187232251 Feb 25 13:04 sarthakedgenewcode-final (2).zip

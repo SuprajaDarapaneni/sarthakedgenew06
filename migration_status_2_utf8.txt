@@ -1,0 +1,25 @@
+﻿
+  Migration name  Batch / Status  
+  2014_10_12_000000_create_users_table  [1] Ran  
+  2014_10_12_100000_create_password_resets_table  [1] Ran  
+  2019_08_19_000000_create_failed_jobs_table  [1] Ran  
+  2019_12_14_000001_create_personal_access_tokens_table  [1] Ran  
+  2022_04_01_091033_create_permission_tables  [1] Ran  
+  2022_04_01_105826_all_tables  [1] Ran  
+  2023_11_16_134449_version1-0-1  [1] Ran  
+  2023_12_07_120054_version1_1_0  [1] Ran  
+  2024_01_30_092228_version1_2_0  [1] Ran  
+  2024_03_12_173521_version1_3_0  [1] Ran  
+  2024_07_21_093657_version1_4_0  [4] Ran  
+  2024_10_03_173555_version_1_4_1  [4] Ran  
+  2024_11_14_125437_version_1_5_0  [4] Ran  
+  2025_02_07_115159_version_1_5_2  [4] Ran  
+  2025_04_10_100907_version_1_5_4  [4] Ran  
+  2025_05_02_100616_version_1_6_0  [4] Ran  
+  2025_07_28_123953_version1_7_0  [4] Ran  
+  2025_09_09_130059_version1_8_0  [4] Ran  
+  2025_10_30_113227_version1_8_1  [4] Ran  
+  2026_02_22_000000_add_next_class_id_to_classes_table  [2] Ran  
+  2026_02_22_211558_add_capacity_to_class_sections_table  [5] Ran  
+  2026_02_23_221000_unify_exams_table  [5] Ran  
+

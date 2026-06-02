@@ -1,0 +1,26 @@
+﻿
+   INFO  Running migrations.  
+
+  2026_02_22_211558_add_capacity_to_class_sections_table  5ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'capacity' (Connection: school, SQL: alter table `class_sections` add `capacity` int not null default '0' after `school_id`)
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+    825Γûò                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    826Γûò                 );
+    827Γûò             }
+    828Γûò 
+  Γ₧£ 829Γûò             throw new QueryException(
+    830Γûò                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    831Γûò             );
+    832Γûò         }
+    833Γûò     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\Connection.php:587
+      PDOException::("SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'capacity'")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Connection.php:587
+      PDOStatement::execute()
+
