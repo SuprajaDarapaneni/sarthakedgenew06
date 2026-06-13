@@ -33,9 +33,21 @@ class CcavenueController extends Controller {
     public function handleResponse(Request $request) {
         $encResponse = $request->encResp;
         
-        // Always check system settings first for CCAvenue credentials
-        DB::setDefaultConnection('mysql');
-        $paymentConfig = PaymentConfiguration::where('status', 1)->whereRaw('LOWER(payment_method) = ?', ['ccavenue'])->whereNull('school_id')->first();
+        if ($request->has('school_id')) {
+            $schoolId = $request->school_id;
+            $school = \App\Models\School::on('mysql')->find($schoolId);
+            if ($school) {
+                \Illuminate\Support\Facades\Config::set('database.connections.school.database', $school->database_name);
+                \Illuminate\Support\Facades\DB::purge('school');
+                \Illuminate\Support\Facades\DB::setDefaultConnection('school');
+                $paymentConfig = PaymentConfiguration::on('school')->where('status', 1)->whereRaw('LOWER(payment_method) = ?', ['ccavenue'])->first();
+            } else {
+                $paymentConfig = null;
+            }
+        } else {
+            DB::setDefaultConnection('mysql');
+            $paymentConfig = PaymentConfiguration::on('mysql')->where('status', 1)->whereRaw('LOWER(payment_method) = ?', ['ccavenue'])->whereNull('school_id')->first();
+        }
         
         if (!$paymentConfig) {
             return redirect()->route('home')->with('error', 'CCAvenue configuration not found.');
@@ -165,7 +177,7 @@ class CcavenueController extends Controller {
         DB::connection('school')->reconnect();
         DB::setDefaultConnection('school');
 
-        $paymentTransaction = \App\Models\PaymentTransaction::on('mysql')->find($transactionId);
+        $paymentTransaction = \App\Models\PaymentTransaction::on('school')->find($transactionId);
         if (!$paymentTransaction) {
             throw new \Exception('Payment transaction not found');
         }

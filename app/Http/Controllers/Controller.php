@@ -938,19 +938,13 @@ class Controller extends BaseController
         try {
             $user = Auth::user();
             if (!$user->hasVerifiedEmail()) {
-                $now = Carbon::now();
-                if ($now->diffInHours($user->updated_at) >= 2) {
-                    // Send the verification email
-                    $user->sendEmailVerificationNotification();
+                // Send the verification email
+                $user->sendEmailVerificationNotification();
 
-                    // Update the `updated_at` timestamp to the current time
-                    $user->touch(); // This will update the `updated_at` timestamp
-                    Auth::logout();
-                    return redirect()->route('login')->with('emailSuccess', 'A verification email has been sent to your email address. Please check your inbox.');
-                } else {
-                    Auth::logout();
-                    return redirect()->route('login')->with('emailError', 'You have already requested a verification email recently. Please try again later.');
-                }
+                // Update the `updated_at` timestamp to the current time
+                $user->touch(); // This will update the `updated_at` timestamp
+                Auth::logout();
+                return redirect()->route('login')->with('emailSuccess', 'A verification email has been sent to your email address. Please check your inbox.');
             }
 
             if ($user->email_verified_at) {

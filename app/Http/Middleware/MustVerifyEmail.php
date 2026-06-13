@@ -20,13 +20,24 @@ class MustVerifyEmail
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if (Auth::user()->hasRole('School Admin')) {
-            if (!$user->hasVerifiedEmail()) {
-                return redirect('/email/verify');
+        if ($user && $user->hasRole('School Admin')) {
+            $mainUser = DB::connection('mysql')->table('users')->where('email', $user->email)->first();
+
+            if ($mainUser && !is_null($mainUser->email_verified_at)) {
+                // Main DB is verified! Sync to Tenant DB if not already verified
+                if (!$user->hasVerifiedEmail()) {
+                    $user->email_verified_at = $mainUser->email_verified_at;
+                    $user->save();
+                }
             } else {
-                $user = DB::connection('mysql')->table('users')->where('id',$user->id)->first();
-                if(is_null($user->email_verified_at)) {
-                    DB::connection('mysql')->table('users')->where('id',$user->id)->update(['email_verified_at' => Carbon::now()]);
+                // Main DB is NOT verified
+                if (!$user->hasVerifiedEmail()) {
+                    return redirect('/email/verify');
+                } else {
+                    // Tenant DB IS verified (somehow). Sync to Main DB!
+                    if ($mainUser && is_null($mainUser->email_verified_at)) {
+                        DB::connection('mysql')->table('users')->where('email', $user->email)->update(['email_verified_at' => Carbon::now()]);
+                    }
                 }
             }
         }

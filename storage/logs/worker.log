@@ -1,112 +1,47 @@
-  2026-03-20 01:06:38 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-03-20 01:07:09 App\Jobs\SetupSchoolDatabase .................. 31s FAIL
-  2026-04-01 17:46:42 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-01 17:46:51 App\Jobs\SetupSchoolDatabase ................... 9s FAIL
-  2026-04-20 17:49:34 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-20 17:50:09 App\Jobs\SetupSchoolDatabase .................. 34s FAIL
-  2026-04-20 17:52:09 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-20 17:52:17 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-04-20 17:54:17 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-20 17:54:24 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-04-27 15:53:04 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-27 15:53:38 App\Jobs\SetupSchoolDatabase .................. 34s FAIL
-  2026-04-27 15:55:38 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-27 15:55:46 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-04-27 15:57:46 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-04-27 15:57:54 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-13 13:52:19 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 13:52:46 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 13:53:04 App\Jobs\SetupSchoolDatabase .................. 44s FAIL
-  2026-05-13 13:53:34 App\Jobs\SetupSchoolDatabase .................. 47s FAIL
-  2026-05-13 13:55:04 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 13:55:14 App\Jobs\SetupSchoolDatabase .................. 10s FAIL
-  2026-05-13 13:55:34 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 13:55:42 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-13 13:57:14 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 13:57:23 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-13 13:57:42 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 13:57:51 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-13 13:59:32 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 14:00:17 App\Jobs\SetupSchoolDatabase .................. 45s FAIL
-  2026-05-13 14:02:17 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 14:02:25 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-13 14:04:25 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-13 14:04:33 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-05-17 22:44:44 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-17 22:45:21 App\Jobs\SetupSchoolDatabase .................. 36s FAIL
-  2026-05-17 22:47:21 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-17 22:47:28 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-05-17 22:49:28 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-17 22:49:36 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-05-25 22:41:40 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-25 22:42:17 App\Jobs\SetupSchoolDatabase .................. 36s FAIL
-  2026-05-25 22:44:17 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-25 22:44:26 App\Jobs\SetupSchoolDatabase ................... 9s FAIL
-  2026-05-25 22:46:26 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-25 22:46:35 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-26 16:41:21 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 16:42:12 App\Jobs\SetupSchoolDatabase .................. 50s FAIL
-  2026-05-26 16:44:12 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 16:44:21 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-26 16:46:21 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 16:46:30 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-26 17:59:34 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:00:19 App\Jobs\SetupSchoolDatabase .................. 44s FAIL
-  2026-05-26 18:01:24 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:01:54 App\Jobs\SetupSchoolDatabase .................. 29s FAIL
-  2026-05-26 18:02:19 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:02:27 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-26 18:03:54 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:04:03 App\Jobs\SetupSchoolDatabase ................... 9s FAIL
-  2026-05-26 18:04:27 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:04:37 App\Jobs\SetupSchoolDatabase ................... 9s FAIL
-  2026-05-26 18:06:04 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:06:12 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-05-26 18:26:15 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:26:47 App\Jobs\SetupSchoolDatabase .................. 32s FAIL
-  2026-05-26 18:28:47 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:28:54 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-05-26 18:30:54 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:31:04 App\Jobs\SetupSchoolDatabase .................. 10s FAIL
-  2026-05-26 18:32:55 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:33:28 App\Jobs\SetupSchoolDatabase .................. 32s FAIL
-  2026-05-26 18:35:28 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:35:35 App\Jobs\SetupSchoolDatabase ................... 6s FAIL
-  2026-05-26 18:37:35 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 18:37:42 App\Jobs\SetupSchoolDatabase ................... 7s FAIL
-  2026-05-26 21:44:43 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 21:45:17 App\Jobs\SetupSchoolDatabase .................. 34s FAIL
-  2026-05-26 21:47:17 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 21:47:25 App\Jobs\SetupSchoolDatabase ................... 8s FAIL
-  2026-05-26 21:49:25 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-26 21:49:25 App\Jobs\SetupSchoolDatabase .............. 67.51ms FAIL
-  2026-05-27 13:41:20 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-27 13:42:13 App\Jobs\SetupSchoolDatabase .................. 52s DONE
-  2026-05-27 13:50:13 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-27 13:51:01 App\Jobs\SetupSchoolDatabase .................. 48s DONE
-  2026-05-27 16:59:35 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-27 17:00:35 App\Jobs\SetupSchoolDatabase ................... 1m DONE
-  2026-05-27 17:46:47 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-27 17:47:40 App\Jobs\SetupSchoolDatabase .................. 52s DONE
-  2026-05-31 13:30:09 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 13:31:06 App\Jobs\SetupSchoolDatabase .................. 57s DONE
-  2026-05-31 15:49:50 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 15:50:41 App\Jobs\SetupSchoolDatabase .................. 50s DONE
-  2026-05-31 15:56:53 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 15:57:39 App\Jobs\SetupSchoolDatabase .................. 46s FAIL
-  2026-05-31 15:59:39 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 15:59:40 App\Jobs\SetupSchoolDatabase ............. 416.83ms FAIL
-  2026-05-31 16:01:40 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 16:01:40 App\Jobs\SetupSchoolDatabase .............. 25.44ms FAIL
-  2026-05-31 21:25:38 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 21:26:22 App\Jobs\SetupSchoolDatabase .................. 43s DONE
-  2026-05-31 21:31:54 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 21:32:42 App\Jobs\SetupSchoolDatabase .................. 48s DONE
-  2026-05-31 23:27:55 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 23:28:35 App\Jobs\SetupSchoolDatabase .................. 40s FAIL
-  2026-05-31 23:30:35 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 23:30:35 App\Jobs\SetupSchoolDatabase .............. 24.25ms FAIL
-  2026-05-31 23:32:36 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-05-31 23:32:36 App\Jobs\SetupSchoolDatabase .............. 19.01ms FAIL
-  2026-06-01 03:09:01 App\Jobs\SetupSchoolDatabase ................... RUNNING
-  2026-06-01 03:09:54 App\Jobs\SetupSchoolDatabase .................. 52s DONE
+  2026-06-03 00:16:58 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 00:18:03 App\Jobs\SetupSchoolDatabase ................ 1m 4s DONE
+  2026-06-03 00:38:53 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 00:39:55 App\Jobs\SetupSchoolDatabase ................ 1m 1s DONE
+  2026-06-03 15:59:39 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 16:00:54 App\Jobs\SetupSchoolDatabase ............... 1m 15s DONE
+  2026-06-03 16:24:21 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 16:25:26 App\Jobs\SetupSchoolDatabase ................ 1m 4s FAIL
+  2026-06-03 16:27:26 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 16:27:26 App\Jobs\SetupSchoolDatabase .............. 49.51ms FAIL
+  2026-06-03 16:29:26 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 16:29:26 App\Jobs\SetupSchoolDatabase .............. 47.87ms FAIL
+  2026-06-03 19:55:21 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-03 19:56:31 App\Jobs\SetupSchoolDatabase ................ 1m 9s DONE
+  2026-06-04 00:18:16 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:19:05 App\Jobs\SetupSchoolDatabase .................. 49s FAIL
+  2026-06-04 00:21:05 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:21:05 App\Jobs\SetupSchoolDatabase .............. 29.95ms FAIL
+  2026-06-04 00:23:06 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:23:06 App\Jobs\SetupSchoolDatabase .............. 23.76ms FAIL
+  2026-06-04 00:30:00 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:31:05 App\Jobs\SetupSchoolDatabase ................ 1m 4s FAIL
+  2026-06-04 00:33:05 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:33:05 App\Jobs\SetupSchoolDatabase .............. 47.88ms FAIL
+  2026-06-04 00:35:05 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:35:05 App\Jobs\SetupSchoolDatabase .............. 38.10ms FAIL
+  2026-06-04 00:44:08 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:45:11 App\Jobs\SetupSchoolDatabase ................ 1m 3s DONE
+  2026-06-04 00:57:44 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 00:58:42 App\Jobs\SetupSchoolDatabase .................. 58s DONE
+  2026-06-04 01:16:21 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 01:19:00 App\Jobs\SetupSchoolDatabase ............... 2m 39s DONE
+  2026-06-04 08:41:15 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 08:42:20 App\Jobs\SetupSchoolDatabase ................ 1m 5s DONE
+  2026-06-04 09:42:16 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 09:43:24 App\Jobs\SetupSchoolDatabase ................ 1m 8s DONE
+  2026-06-04 09:49:16 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 09:50:38 App\Jobs\SetupSchoolDatabase ............... 1m 22s DONE
+  2026-06-04 10:39:47 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 10:41:22 App\Jobs\SetupSchoolDatabase ............... 1m 34s DONE
+  2026-06-04 10:41:22 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 10:42:54 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 10:42:54 App\Jobs\SetupSchoolDatabase ............. 188.85ms FAIL
+  2026-06-04 10:44:54 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 10:44:54 App\Jobs\SetupSchoolDatabase .............. 23.93ms FAIL
+  2026-06-04 11:01:55 App\Jobs\SetupSchoolDatabase ................... RUNNING
+  2026-06-04 11:03:18 App\Jobs\SetupSchoolDatabase ............... 1m 23s DONE
